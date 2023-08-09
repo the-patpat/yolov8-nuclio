@@ -26,8 +26,7 @@ def handler(context, event):
         event (_type_): _description_
     """
     #From https://opencv.github.io/cvat/docs/manual/advanced/serverless-tutorial/#choose-a-dl-model
-    context.logger.info("Run retinanet-R101 model")
-    context.logger.debug(f'Event: {event}')
+    context.logger.info("Run YOLOv8 model")
     data = event.body
     buf = io.BytesIO(base64.b64decode(data["image"]))
     threshold = float(data.get("threshold", 0.5))
