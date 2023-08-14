@@ -2,7 +2,6 @@ import io
 import json
 import base64
 from PIL import Image
-import debugpy
 import numpy as np
 
 from ultralytics import YOLO
@@ -10,10 +9,9 @@ from ultralytics import YOLO
 def init_context(context):
     context.logger.info("Init context... begin")
     # Load a model
-    model = YOLO('/opt/nuclio/best.pt')
+    model = YOLO('/opt/nuclio/yolov8l.pt')
     context.user_data.model_handler = model
 
-    debugpy.listen(5678)
     #Test 
     model(np.zeros((480, 640, 3), dtype=np.uint8))
     context.logger.info("Init context... end")
@@ -50,7 +48,6 @@ def handler(context, event):
                     "type" : "rectangle"
                 }
             )
-    
     return context.Response(body=json.dumps(results), headers={},
         content_type='application/json', status_code=200)
 
